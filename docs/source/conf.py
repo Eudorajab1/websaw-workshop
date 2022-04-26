@@ -1,35 +1,37 @@
-# Configuration file for the Sphinx documentation builder.
+from datetime import datetime
 
-# -- Project information
+extensions = []
+templates_path = ["_templates"]
+source_suffix = ".rst"
+master_doc = "index"
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = u"WebSaw"
+year = datetime.now().year
+copyright = u"%d WebSaw" % year
 
-release = '0.1'
-version = '0.1.0'
+exclude_patterns = ["_build"]
 
-# -- General configuration
+html_theme = "alabaster"
+html_static_path = ['_static']
 
-extensions = [
-    'sphinx.ext.duration',
-    'sphinx.ext.doctest',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.intersphinx',
-]
 
-intersphinx_mapping = {
-    'python': ('https://docs.python.org/3/', None),
-    'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
+html_sidebars = {
+    "**": [
+        "about.html",
+        "searchbox.html",
+        "navigation.html",
+        "relations.html",
+        
+#        "donate.html",
+    ]
 }
-intersphinx_disabled_domains = ['std']
-
-templates_path = ['_templates']
-
-# -- Options for HTML output
-
-html_theme = 'sphinx_rtd_theme'
-
-# -- Options for EPUB output
-epub_show_urls = 'footnote'
+html_theme_options = {
+    "logo": "websaw-logos_transparent.png",
+    "description": "A light, fully fucntional, ultra fast, flexible and feauture rich web framework",
+    "github_user": "Eudorajab1",
+    "fixed_sidebar": True,
+    "show_powered_by": False,
+    "show_related" : True,
+    #"github_banner" : True,
+    "tidelift_url": "https://tidelift.com/subscription/pkg/pypi-alabaster?utm_source=pypi-alabaster&utm_medium=referral&utm_campaign=docs",  # noqa
+}
