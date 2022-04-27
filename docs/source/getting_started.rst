@@ -4,111 +4,33 @@
 Getting Started
 ===============
    
-Assuming you have successfully installed *Websaw* by following the :ref:`installation_label` procedure you 
-should now have the following depending on the installation method you chose.
+Assuming you have successfully installed *Websaw* as per the `Websaw User Guide <https://websaw-userguide.readthedocs.io/en/latest/installation.html/>`_ 
+we are ready to go. If not please install and verify your installation using the above link.
 
-If you installed using pip:
-
-* latest stable version of websaw and dependancies installed in your venv
-
-If you installed via git:
-
-* latest websaw sourcecode installed in your websaw folder.
-* apps directory containing sample apps shipped with *Websaw*
-  
-If you have installed from source you need to ::
-
-    cd websaw
-
-
-Irrespective of installation method lets verify that *Websaw* has installed correctly as follows: 
-::
-
-    pythn -m websaw -h
-
-If you get the following output Websaw has been installed and is ready to use. 
-::
-
-    Usage: python -m websaw [OPTIONS] COMMAND [ARGS]...
-
-    WEBSAW - a web framework for rapid development with pleasure
-
-    Type "websaw COMMAND -h" for available options on commands
-
-    Options:
-        -help, -h, --help  Show this message and exit.
-
-    Commands:
-        call          Call a function inside apps_folder
-        new_app       Create a new app copying the scaffolding one
-        run           Run all the applications on apps_folder
-        set_password  Set administrator's password for the Dashboard
-        setup         Setup new apps folder or reinstall it
-        shell         Open a python shell with apps_folder's parent added to...
-        version       Show versions and exit
-
-If not please refer to the :ref:`installation_label` section of this manual.
-
-This also leads us into the next section where we will look at developing the ubiquitous Hello World app which will provice you with some building blocks for deleoping your aswesam *Websaw* apps.
-
-Before we do .. lets initialise out apps forlder and create a new app.
-
-For git installations the first step is not necessary as the apps folder and a few example apps are already installed so you can skip this first step.
-
-So the first thing we need to do is use the CLI to help us. 
-
-The ClI has many commands and options which will be covered in its own section later on so for now lets run the following:
-::
-
-    python -m websaw setup apps
-
-This will create the <apps> folder for us in our root folder. In this case we have chosen to name it apps but it could just as well be any valid folder.
-
-Now lets create our hello world app as a new app by running the following:-
-::
-
-    python -m websaw new_app <path/to/scaffolding/app>
-
-The scaffolding app zipfile shoudl be in your root directory by default
-
-For git installations the easiest thing to do is just copy the apps/simple folder or rename it to heelo_world
-
-In all cases it is just as easy to create both the apps folder and the hello_world app folder manually
-::
-
-    mkdir apps ## if does not exist
-    cd apps
-    touch . __init__py
-    mkdir hello_world
-    cd hello_world
-    touch . __init__.py
-
-or by using your favourite dev ide such as vscode.
-
-As I genrally use vscode simply type code . in the root directory brings up a new instande of vscode
-
-
-Our First Application
----------------------
+Tutorial : Hello World
+----------------------
 
 As per tradition we are going to create a simple Hello World app to understnad the basics of the *Websaw* framewok 
 after which we will get into a lot more depth and detail regarding the tools and techniques being used.
 
-For those of you who want to dive right into a slightly more complex application there is a dedicated 
-`Websaw Examples and Tutorials <https://eudorajab1.github.io/>`_ that will walk you through some of the more complex examples.
+Please ensure that you have a websaw/apps folder with either the example apps as subfolders or an empty ``__init__.py`` file in the root
+before you continue.
 
-Either way it you are new to *Websaw* we reccomend following along here as these excercises are designed to give you the building blocks 
-for later usage.
+Now we can create our hello_world app folder as such:
+::
+    mkdir hello_world
+    cd hello_world
+    touch __init__.py
 
-All that being said .. lets dive in and see what we can do.
 
-Currently in our apps/hello_world folder we should have a single file __init__.py. If you have copied an existing folder or 
+Now in our apps/hello_world folder we should have a single file __init__.py. If you have copied an existing folder or 
 renameed an exisrting example we reccomend deleting everything other than the __init__.py in order to follow this example.
 
 Now that we have our directory structure sorted out lets get coding!!.
 
-Before we dive in however there a number of differnt conventions that can be used for python projects. Looking at differnt covnetions is 
-beyond the scope of this document and we suggest that your apps take on a structured approach with modules and sub folders.
+Before we dive in however there a number of differnt conventions that can be used for python projects. 
+Looking at differnt covnetions is beyond the scope of this workshop and we suggest that your apps take 
+on a structured approach with modules and sub folders.
 
 To this end lets start off by creating a controllers.py to hold all of our **actions**.
 ::
@@ -124,7 +46,7 @@ Then lets open **controllers.py** in the editor of choice and add the following 
     import ombott
    
     ombott.default_app().setup(dict(debug=True))
-    class Context(DefaultContec):
+    class Context(DefaultContext):
         ...
 
     ctxd = Context()
@@ -203,7 +125,7 @@ then mount our app using **app.mount()**
 
 You can now save and close the __init__.py
 
-Thats it .. lets check it out.
+Thats it. Lets check it out.
 
 In your terminal run the following:
 ::
@@ -227,8 +149,8 @@ Not very exciting and not very pretty but the foundation for things to come.
 
 Well done .. you are now ready to see what *Websaw* can really do!!
 
-Using Templates
----------------
+Adding a Template
+.................
 
 Templates are a tried and tested way to give your application a uniform *look and feel* whilst at the same
 time allowing you to use one or more .css libraries for styling including your own custom styling.
@@ -239,7 +161,7 @@ is beyond the scope of this document to cover this.
 That having been said lets jump into adding a bit of 'zing' to our otherwise drab and sad looking app.
 
 The first thing we need to do is create a directory where we will be storing our templates. By convention we call this 
-directory **templates** and create and empt __init__.py.
+directory **templates** and create and empty __init__.py.
 
 From within your hello_world directory run the following:
 ::
@@ -380,17 +302,16 @@ number of times they have actually visited our application.
 
 To do this lets create a very simple **Fixture**
 
-.. _adding_a_fixture:
-
-Adding a Fxture
----------------
+Adding a Fixture
+................
 
 *Websaw* has a number of "out of the box" fixtures which we can subclass or extend in order to generate 
 specific functionaltiy that we may need within the context of our application. 
 
-These are all detailed extensively in the :ref:`fixtures` section of this manual.
+These are all detailed extensively in the `Websaw User Guide <https://websaw-userguide.readthedocs.io/en/latest/fixtures.html>`_
+and you have already used the **Template** fixture by including the ``app.use('index.html')``.
 
-For now the important things to note about **Fixtures** is as foolows:
+For now the important things to note about **Fixtures** are as foolows:
 
   * they are only initialised when required (on the fly).
   * they are context specific and can comprise of other fixtures.
@@ -420,10 +341,6 @@ Then we can define our new fixture called **Visited** as such:
         def get_visits(self):
             return self.data.session['counter']
 
-.. note:: 
-
-    We will cover all the Fixture properties in the :ref:`fixtures` sectiom in detail. For now we are using the 
-    take_on method to basically increment the session['counter']
 
 We then add a fixture method called get_visits which we will use in our action to access our fixture data and include
 it to our context.
@@ -443,6 +360,18 @@ and we simply add visted to the dictionary we are returning to the template
 ::
 
     return dict(msg='Hello Websaw World', visited=visited)
+
+*But Hang on just a second here !!*
+
+Where did the **session** come from all of a sudden in our action? and more importantly how come it is 
+available all of a sudden in our action?
+
+.. important:: 
+
+    *Simply by touching the session in our fixture we initialise and make it available in our action by using ctx*
+
+
+
 
 Now all that is left for us to do is to style and display the infomration in our index.html as such:
 ::
@@ -479,11 +408,4 @@ So far we have seen how the three main layers of *Websaw* in action.
     * **Context**
     * **Application**
 
-You will also note that so far we have not mentioned things like **request**, **response** and **sessions** that make up any 
-HTTP framework.
-
-This does not mean that they are not there .. far from it. 
-
-We will cover these in the **Context** section of the user guide but for now lets take a deeper look into **fixture** layer
-by heading over to the :ref:`fixtures` seciton.
-
+Congratulations ... you have successfully completed your first **Websaw** Workshop.
