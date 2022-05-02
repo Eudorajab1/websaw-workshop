@@ -121,11 +121,65 @@ And that is pretty much it for this tutorial. Pretty awesome stuff!!
 
 Pyjsaw
 ------
-In this tutorial we will walk through installing **Pyjsaw** into our working environment, take a look at the IDE
-and create a fully functional ToDo app. There is no additional integration required with **Websaw**.
+In this tutorial we will walk through installing **Pyjsaw** into our working environment. Next we will look at the IDE
+and finally create a fully functional ToDo app. There is no additional integration required with
+**Websaw**.
+
+Before we do that lets take a look at what **Pyjsaw** is.
+
+**Pyjsaw** in its simplest terms is a sophisticated transpiler that allows us to develop SPA's in a more 
+pythonic way inlcuding components, store and all the other good **Vue** things required for client side application processing.
+
+Irrespective of the size and complexity of the app we are building we will always end up with a single **.js** file
+commonly **index.js** which is the entry point for our SPA.
+
+The **Pyjsaw** IDE is a good example of the power of **Pyjsaw** as it was written using **Pyjsaw** itself.
 
 Installation
 ............
+
+Installation of **Pyjsaw** is done using pip.
+
+To install **Pyjsaw** in your websaw working environment simply open a terminal window
+
+If you are using a venv (reccomended) make sure you have it activated before installing **Pyjsaw**.
+::
+
+    source ./bin/activate
+    cd websaw #if not already in the websaw directory
+    pip install https://github.com/valq7711/pyjsaw/archive/main.zip
+
+In order to test the installation make sure that websaw is still running then head on over to your 
+browser and
+::
+
+    http://localhost:8000/pyjsaw
+
+If all is good you should see recieve prompt for the administrator password.
+
+If you do not see this it may well be that you have not set up the **Websaw** admin password when installing **Websaw**.
+
+In order to do this from your command prompt or terminal window type the following:
+::
+    cd websaw # if you are not already there
+    python -m websaw set_password
+
+You will be prompted to enter and confirm the admin password of your choice.
+
+If all is good you can now run **Websaw** again from the terminal as such:
+::
+    python -m websaw run apps
+
+Head on back to your browser and refresh and you should be prmpted to enter and re-enter the admin 
+password.
+
+If that does not work please refer to the `Websaw User Guide <https://websaw-userguide.readthedocs.io/en/latest/installation.html>`_
+for further information.
+
+All things being good you should see the **Pyjsaw** IDE in your browser.
+ 
+Time to create some amazing apps!!
+
 
 The IDE
 .......
