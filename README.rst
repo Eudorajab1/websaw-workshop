@@ -1,9 +1,8 @@
-Template for the Read the Docs tutorial
-=======================================
+WebSaw Workshop repo
+====================
 
-This GitHub template includes fictional Python library
-with some basic Sphinx docs.
+Source code for all the tuturials in the Websaw Workshop User Guide can be found here in the apps folder.
 
-Read the tutorial here:
+The latest published documntaiton can be found at https://websaw-workshop.readthedocs.io/en/latest/
 
-https://docs.readthedocs.io/en/stable/tutorial/
+Happy reading and happy coding.
