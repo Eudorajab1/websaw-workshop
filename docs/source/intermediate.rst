@@ -14,11 +14,11 @@ these concepts.
 In addition we are going to be introducing **Pyjsaw** for the first time and showing you how to install it and create 
 awesome SPA's in **Websaw**
 
-SQLite3 Fixture
----------------
+2.1 : SQLite Fixture
+--------------------
 
 In this turorial We are going to make the fixture equivalent of https://flask.palletsprojects.com/en/2.0.x/extensiondev/
-as a comparison to those of you familiar with flask extensions.
+as a comparison to those of you familiar with **Flask** amd flask extensions.
 
 So lets get going and create our **fixture**.
 ::
@@ -50,11 +50,10 @@ So lets get going and create our **fixture**.
                 db.commit()
             db.close()
 
-
 Now lets put it to use:
 ::
 
-    # apps/sqlite3_demo/controllers.py
+    # apps/sqlite3_demo/controllers.py 
 
     import sqlite3
 
@@ -119,13 +118,40 @@ And finally lets test it:
 
 And that is pretty much it for this tutorial. Pretty awesome stuff!!
 
-Pyjsaw
-------
-In this tutorial we will walk through installing **Pyjsaw** into our working environment. Next we will look at the IDE
-and finally create a fully functional ToDo app. There is no additional integration required with
-**Websaw**.
+2.2 SPA's
+---------
+In this tutorial we will walk through two diffent way to build **SPA's** or **client side** apps with **WebSaw**.
 
-Before we do that lets take a look at what **Pyjsaw** is.
+We will look at using the following:-
+
+    * **Vue.js**
+    * **PyJsaw**
+
+Using Vue.js  
+............
+
+Under construction
+
+Introduction
+::::::::::::
+
+Under construction
+
+Checking dependancies
+:::::::::::::::::::::
+
+Under construction
+
+The Vue Todo App
+::::::::::::::::
+
+Under construction
+
+Using PyJsaw
+............
+
+What is PyjSaw?
+:::::::::::::::
 
 **Pyjsaw** in its simplest terms is a sophisticated transpiler that allows us to develop SPA's in a more 
 pythonic way inlcuding components, store and all the other good **Vue** things required for client side application processing.
@@ -136,9 +162,10 @@ commonly **index.js** which is the entry point for our SPA.
 The **Pyjsaw** IDE is a good example of the power of **Pyjsaw** as it was written using **Pyjsaw** itself.
 
 Installation
-............
+::::::::::::
 
-Installation of **Pyjsaw** is done using pip.
+Installation of **Pyjsaw** can be done via **PYPI** or installing from **Github**. Either way it integrtates semailessy
+with **WebSaw** and can be viewed as part of the **WebSaw** framework.
 
 To install **Pyjsaw** in your websaw working environment simply open a terminal window
 
@@ -173,17 +200,19 @@ If all is good you can now run **Websaw** again from the terminal as such:
 Head on back to your browser and refresh and you should be prmpted to enter and re-enter the admin 
 password.
 
-If that does not work please refer to the `Websaw User Guide <https://websaw-userguide.readthedocs.io/en/latest/installation.html>`_
-for further information.
+If that does not work please refer to the `Websaw User Guide <https://websaw-userguide.readthedocs.io/en/latest/getting_started.html>`_
+and take a look at the **Installytion** seciton for further information.
 
 All things being good you should see the **Pyjsaw** IDE in your browser.
  
 Time to create some amazing apps!!
 
-
 The IDE
-.......
+:::::::
+
+Under construction
 
 Pyjsaw Todo App
-...............
+:::::::::::::::
 
+Under Construction
