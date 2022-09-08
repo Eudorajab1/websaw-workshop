@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <base href="[[=URL('static')]]/">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAAQEAAAEAIAAwAAAAFgAAACgAAAABAAAAAgAAAAEAIAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAAA=="/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+        [[block page_head]]<!-- individual pages can customize header here -->[[end]]
+    </head>
+    <body>
+        <header>
+            <!-- Navigation bar -->
+            <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+            <!-- Logo -->
+            <a class="navbar-item " href="#">
+                <div class="has-text-primary is-size-5 has-text-weight-semibold">Home</span>
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="my-navbar">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+
+            <!-- Left menu ul/li -->
+            [[block page_menu_items]]<!-- individual pages can add menu items here -->[[end]]
+
+            [[block page_left_menu]][[end]]
+            <!-- Right menu ul/li -->
+            </nav>
+        </header>
+        <!-- beginning of HTML inserted by extending template -->
+        [[include]]
+        <!-- end of HTML inserted by extending template -->
+        <footer class="footer is-small">
+            <div class="content has-text-centered">
+                <p>Powered by <strong>&nbsp;WEBSAW</strong> <a href="https://websaw.com"></a>
+                </p>
+            </div>
+        </footer>
+    </body>
+    [[block page_scripts]]<!-- individual pages can add scripts here -->[[end]]
+</html>

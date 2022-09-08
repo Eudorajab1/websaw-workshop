@@ -5,35 +5,42 @@
 Tutorials Overview
 ==================
 
-*Websaw* ships with a number of example apps each aimed to demonstrate in a *generic* way some of the 
-key features of *Websaw*.
+All the tutorials in this guide are designed to act as building blocks and we strongly reccomend that you familiarise yourself
+with each of the concepts portraxed in each of the sections before moving on to the next.
 
-The first set of **Tutorials** will be focussed on these shipped **example** apps and we will be 
-walking through some of these examples to highlight core areas of fucntionality.
+We will start with a few simple applications that will highlight the one or more of the fundamental building blocks 
+for raid application development using **WebSaw**
 
-In addition we will build a few simple apps in order to get some *'hands on'* ecaperience as we go. 
+We will call these the **Getting Started** tutorials and they are aimed at users unfamiliar with **Websaw**.
 
-We will call these the **Getting Started** tutorials and they are aimed at users still unfamiliar with **Websaw**.
-The objective is to explain in greater depth the basic concepts and dempnstrate the power and flexibility of 
-**Websaw**. 
+The objective is to explain in greater depth the basic concepts and demonstrate the power and flexibility of 
+**WebSaw**. You can get started right away :ref:`getting_started` here.
+
+As we progress we will explore the many options available including the use of the **UPYTL** template renedering engine along with incorporating
+**Vue**, **pyhonic SPA app development** using **Pyjsaw** and a number of DB wrappers including **Voodoodal** all of 
+which have been carefully selected and vetted in order to ensure complete compliance and compatibility both thechnically
+and philosophically.
+
+Later **Tutorials** will focus more on the **UPYTL** rendering engine allowing us to builf up our own **Warehouse** of 
+re-useable components as we go.
 
 .. note::
 
-    Reccomended for users with little or no **Websaw** experience.
+    Reccomended for users with little or no **WebSaw** experience.
 
-The second set of **Tutorials** focusses more on building some simple applicartions from the **ground up**
+The second set of **Tutorials** focusses more on building some more complex applicartions from the **ground up**
 and will introduce **Pyjsaw** and dempnstrate the power and flexibility of **SPA's**. These will be considerd
-**Intermediate** tutorials and will be suitable for those who have mastered concepts outlined in the **Getting Started**
+**Intermediate** tutorials and will be suitable for those who have mastered concepts covered in the **Getting Started**
 tutorials.
 
-Finally we will have a set of **Advanced** tutorials where we will explore advanced concepts and build some more
-advanced applications, including the introduction of **VoodooDal**. 
+Finally we have a set of **Advanced** tutorials where we will explore advanced concepts and build some more
+advanced applications. If you are familiar with basic and intermediate web app developement you can jump straight to this
+set of tutorials which will showcase some of the more advanced features of **Websaw** with real life apps.
 
-This set of turorials will be suitable for those who are comfortable with the concepts
-and functionality as per the first two sets of tutorials and should not be attempted without such.
+.. note::
 
-Depending on your level of comfort it is not necessary to follow these tutorials in any strict sequence 
-and we trust that there is somethign for everyone right here.
+    Depending on your level of comfort it is not necessary to follow these tutorials in any strict sequence 
+    and we trust that there is somethign for everyone right here.
 
 *We are good to go*. Chose your workshop
 
