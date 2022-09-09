@@ -4,7 +4,7 @@
 Getting Started
 ===============
    
-Assuming you have successfully installed *Websaw* as per the `Websaw User Guide <https://websaw-userguide.readthedocs.io/en/latest/getting_started.html/>`_ 
+Assuming you have successfully installed *Websaw* as per the `Websaw User Guide <https://websaw-userguide.readthedocs.io/en/latest/getting_started.html>`_ 
 we are ready to go. If not please install and verify your installation using the above link.
 
 
@@ -327,11 +327,13 @@ Insatllaion is extremely straight forward as follows:
 **UPYTL** ships with a number of standard components which can be used *out of the box* but for the purposes of this 
 tutorial we will be building a simple template of our own from scratch.
 
-As this is a very simple application and we want to compare apples with apples we will be using only the elements
+As this is a very simple application and we want to compare like for like we will be using only the elements
 of **UPYTL** relevent to this app. For a much more in-depth look at **UPYTL** and creating custom components such as **Pages**, **Forms** and 
 custom **Field types** you can head over to the **Advanced Tutorials** section of this user guide where **UPYTL** is covered in a LOT more depth.
 
-The first thing we need to do is to create a module / library to store our components /templates. Later on we will make this 
+As such we will be creating a straight forward **UPYTL** template that does not use any components as none have been created yet.
+
+The first thing we need to do is to create a module / library to store our templates. Later on we will make this 
 library available to all of our apps by leveraging on **WebSaw's** built in **mixin** functionality.
 
 But for now lets head over to our app directory and create a file called *templates.py* and paste the following code.
@@ -364,9 +366,14 @@ But for now lets head over to our app directory and create a file called *templa
             }
         }
 
-    
-As you can see our **HelloWorld** component does not do much and its sole purpose in life if to receive a message from
-our **Hello World ** action response with a bit of styling thrown in.
+As you can see our **Index** template follows the same structure as our HTML template with a **Header**, **Body** and **Footer**
+sections. We can use the standard CSS styling attributes as defined by our preferred library in any or all sections of our template.
+
+The main advantage here is that we can now define our templates in a structured and pythonic way and leave **UPYTL** to render the 
+appropriate HTML under the hood.
+
+Futher more, when we start using components in our application you will begin to see the true benefit of 
+**UPYTL**
 
 .. note ::
     We could have easily included the template in the controller.py but for the sake of clarity it is much better to keep them seperate
@@ -478,10 +485,10 @@ it to our application context.
 
 By adding our **Fixture** to the application context as above, all actions in the application will have access to our fixture.
 
-Alternatively we can let only one or more actions use our fixture simply by removiing from the app context and installed
-including it in the **@app_use(...)** decorator for each action required.
+Alternatively we can let only one or more actions use our fixture simply by removing it from the app context and adding it 
+only in the **@app_use(...)** decorator for each action that we want to use the fixture.
 
-For now as we only have one action it is neither here not there.
+For now lets include it in the app context as as our app grows we may wish other actions to have access as well.
 
 In our action we now can use our new fixture simply by adding the following code
 ::
@@ -554,7 +561,6 @@ We could equally well access the ctxd.session object and increment it directly i
 but now **ANY** action using our **ctxd** that requires a count of the visits can access our **Visits** fixture or not
 as the case may be.
 
-And that just about wraps up our **Getting Started ** tutorials apart from a brief recap.
 
 So far we have seen how the three main layers of **WebSaw** in action.
     
@@ -565,8 +571,174 @@ So far we have seen how the three main layers of **WebSaw** in action.
 We have seen the different methodologies we can use to render our output and we have created a simple custom 
 fixture that we can extend to log all visits to a db or log files or wherever we want.
 
-** Congratulations ** you have completed the first part of the journey to becomming a proficient web application developer using 
-**WebSaw**
+With our all our apps now in place and working it would be good to be able to get some low level info about then as and 
+when we require and in order to do that we will now take a look at **Mixins**
+
+1.4 : Using Mixins
+------------------
+
+Given that we now have a total of 4 different applciations in our apps folder which could essentially be completely different 
+lets take a look at using the **mixins** feature of **WebSaw**
+
+The objective of this tutorial is to create a simple mixin that will return low level information for our app.
+
+We will create a single mixin that can be used by **any** application in the same apps folder.
+
+So lets get to it.
+
+If you have set up your apps folde using the **WebSaw** cmdline option **setup_apps** you will already have a 'apps/mixins' folder in 
+your project directory.
+
+If not lets create one as follows:
+::
+    # apps
+
+    mkdir mixins
+    cd mixins
+    touch __init__.py
+
+    mkdir myinfo
+    cd myinfo
+    touch __init__.py
+    touch controllers.py
+    touch templates.py
+
+Your apps directory structure should now look something like this:
+::
+    apps/
+        hello_world/
+        hello_world_html/
+        hello_world_upytl/
+        hello_world_fixture/
+        mixins/
+            myinfo/
+
+Using your editor of choice open up the apps/mixins/myinfo/controllers.py and paste in the following code.
+::
+    # apps/mixins/myinfo/controllers.py
+    import os
+    from websaw import DefaultApp, DefaultContext, Reloader
+    from . import templates as ut
+
+    class Context(DefaultContext):
+        ...
+        
+    ctxd = Context()
+    app = DefaultApp(ctxd, name=__package__)
+
+    @app.route('myinfo')
+    @app.use(ut.index)
+    def info_app(ctx: Context):
+        def rep(v):
+            if isinstance(v, list):
+                return [rep(_) for _ in v]
+            if isinstance(v, str):
+                return v
+            return repr(v)
+
+        ret = {
+            k: rep(v) for k, v in ctx.app_data.__dict__.items()
+        }
+        ret['env'] = ctx.env
+        return dict(msg=ret)
+
+The first thing you will notice is that this looks exactly like any other application that we would build and you would be 
+absolutely correct.
+
+So lets add our template 
+::
+    # apps/mixins/myinfo/teplates.py
+    from upytl import html as h
+
+    # flake8: noqa E226
+
+    index = {
+        h.Html():{
+            h.Head():{
+                h.Title():"[[app_get('app_name')]]",
+                    h.Meta(charset='utf-8'):'',
+                    h.Link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css'):None, 
+                },
+                h.Body():{
+                    h.Nav(Class='navbar is-light', role='navigation'):{
+                        h.A(Class='navbar-item',  href="#"):{
+                            h.Div(Class='has-text-primary is-size-5 has-text-weight-semibold'):'Home'
+                        },
+                    },
+                    h.Div(Class = 'columns'):{
+                        h.Div(Class='section'):{
+                            h.Div(Class="title"): 'This is the MyInfo MIXIN Template',
+                            h.Div(For='m in msg'):{
+                                h.Div():'[[m]]'+'  :  '+'[[msg[m] ]]',
+                            },
+                        },    
+                    },
+                },
+                h.Footer():{
+                    h.Div(Class='subtitle has-text-centered'): 'This is the MyInfo MIXIN footer',
+                }
+            }
+        }
+
+Look familiar?
+
+Effectively what we now have in the mixins folder is a fully functioning applicaiton. Because we want multiple applications to be able to use it
+the one thing we do NOT do is mount our mixin. 
+::
+    # apps/mixinis/myinfo/__init__.py
+    from .controllers import app, Context
+
+    # this is mixin, do not mount it
+    #app.mount()
+
+This is really the only difference between an application and a mixin.
+
+Whatever an application can do a mixin can do just as well.
+
+So now we have our mixin sorted out lets see how we use it in any or all of our apps.
+
+Lets start off by including it in our hello_world_upytl app
+::
+    # apps/hello_world_upytl/conrollers.py
+    
+    from websaw import DefaultApp, DefaultContext
+    import ombott
+    # import the mixin of your choice 
+    from ..mixins import myinfo
+    from . import templates as ut
+
+    ombott.default_app().setup(dict(debug=True))
+
+    # Add it to the app context
+    class Context(myinfo.Context, DefaultContext):
+        ...
+
+    ctxd = Context()
+    app = DefaultApp(ctxd, name=__package__)
+
+    # use mixin(s)
+    app.mixin(myinfo.app)
+
+    @app.route('index')
+    @app.use(ut.index)
+    def hello_world(ctx: Context):
+        return dict(msg='Hello Websaw World')
+
+And that is it.
+
+To test it make sure **WebSaw** is running and head over to http://localhost:8000/hello_world_upytl/myinfo
+
+The **myinfo** mixin is now available to all your apps you just need to follow the steps above for each app you want to use the mixin.
+
+According to the `Websaw User Guide <https://websaw-userguide.readthedocs.io/en/latest/mixins.html>`_  a mixin can be any number of things.
+
+A classic use case would be do have an **auth** mixin which all apps can use to authorise access but really the sky is the limit as 
+to what you can use this powerfull feature for.
+
+And that just about wraps up our **Getting Started** tutorials section.
+
+**Congratulations** you have completed the first part of the journey to becomming a proficient web application developer using 
+**WebSaw**.
  
- In the next set of tutorials we move away from our hello_world app and look more at more usefull 'real-life' type apps which will demonstrate even more 
- of **WebSaw's** awesome functionality.
+In the next set of tutorials we move away from our hello_world app and look more at more usefull 'real-life' type apps which will demonstrate even more 
+of **WebSaw's** awesome functionality.
